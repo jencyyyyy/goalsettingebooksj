@@ -62,15 +62,15 @@
             user-select: none;
             transition: background-color 0.6s ease;
             border-radius: 50%;
-            z-index: 10; /* Ensure buttons are above slides */
+            z-index: 10;
         }
 
         .prev {
-            left: 20px; /* Add some spacing from the edge */
+            left: 20px; 
         }
 
         .next {
-            right: 20px; /* Add some spacing from the edge */
+            right: 20px; 
         }
 
         .prev:hover, .next:hover {
@@ -79,12 +79,12 @@
 
         .dot-container {
             position: absolute;
-            bottom: 20px; /* Add some spacing from the bottom */
+            bottom: 20px; 
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
-            z-index: 10; /* Ensure dots are above slides */
+            z-index: 10; 
         }
 
         .dot {
@@ -102,25 +102,9 @@
             background-color: #634294;
         }
         
-        /* Optional: Add a main title if needed */
-        /* 
-        #main-title {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 2em;
-            z-index: 10;
-        }
-        */
     </style>
 </head>
 <body>
-
-    <!-- Optional: Add a main title if you intend to use it -->
-    <!-- <h1 id="main-title">Goal Setting Tools</h1> -->
-
     <div class="slider-container">
         <div class="slides" id="slides">
             <a><img class="slider-image" src="images/panel1.jpg" alt="Image 1"></a>
@@ -202,13 +186,13 @@
                 slideIndex = slides.length - 1;
             }
             showSlides(slideIndex);
-            resetAutoPlay(); // Reset auto-play on manual navigation
+            resetAutoPlay(); 
         }
 
         function currentSlide(n) {
             slideIndex = n;
             showSlides(slideIndex);
-            resetAutoPlay(); // Reset auto-play on manual navigation
+            resetAutoPlay(); 
         }
 
         function showSlides(n) {
@@ -221,11 +205,6 @@
             if (dots[n]) {
                 dots[n].classList.add('active');
             }
-
-            if (document.getElementById("main-title")) {
-                document.getElementById("main-title").textContent = titles[currentIndex];
-            }
-            */
         }
 
         // Auto-Play Functionality
@@ -247,18 +226,11 @@
         let currentTitleIndex = 0;
 
         function changeTitle() {
-            currentTitleIndex = (currentTitleIndex + 1) % titles.length; 
-            document.getElementById("dynamic-title").textContent = titles[currentTitleIndex]; 
-
-            // Uncomment the following lines if you have a main-title element
-            /*
-            const mainTitle = document.getElementById("main-title");
-            if (mainTitle) {
-                mainTitle.textContent = titles[currentTitleIndex]; // Change the heading
-            }
-            */
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length; // Cycle through titles
+            document.getElementById("dynamic-title").textContent = titles[currentTitleIndex]; // Change the page title
         }
 
+        // Change title every 4 seconds
         setInterval(changeTitle, 4000);
     </script>
 </body>
