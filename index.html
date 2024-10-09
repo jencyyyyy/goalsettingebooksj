@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="dynamic-title">Goal Setting Tools</title>
@@ -36,6 +36,7 @@
         .slides a {
             min-width: 100%;
             height: 100vh;
+            text-decoration: none; /* Optional: Remove underline from links */
         }
 
         .slides img {
@@ -52,22 +53,24 @@
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             padding: 22px;
             color: white;
             font-weight: bold;
             font-size: 35px;
-            background-color:rgba(31, 32, 29, 0.319);
+            background-color: rgba(31, 32, 29, 0.319);
             user-select: none;
-            transition: 0.6s ease;
+            transition: background-color 0.6s ease;
             border-radius: 50%;
+            z-index: 10; /* Ensure buttons are above slides */
         }
 
         .prev {
-            left: 0;
+            left: 20px; /* Add some spacing from the edge */
         }
 
         .next {
-            right: 0;
+            right: 20px; /* Add some spacing from the edge */
         }
 
         .prev:hover, .next:hover {
@@ -76,18 +79,19 @@
 
         .dot-container {
             position: absolute;
-            bottom: 10px;
+            bottom: 20px; /* Add some spacing from the bottom */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
+            z-index: 10; /* Ensure dots are above slides */
         }
 
         .dot {
             cursor: pointer;
-            height: 10px;
-            width: 10px;
-            margin: 0 4px;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
             background-color: white;
             border-radius: 50%;
             display: inline-block;
@@ -97,9 +101,25 @@
         .dot.active {
             background-color: #634294;
         }
+        
+        /* Optional: Add a main title if needed */
+        /* 
+        #main-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2em;
+            z-index: 10;
+        }
+        */
     </style>
 </head>
 <body>
+
+    <!-- Optional: Add a main title if you intend to use it -->
+    <!-- <h1 id="main-title">Goal Setting Tools</h1> -->
 
     <div class="slider-container">
         <div class="slides" id="slides">
@@ -168,12 +188,11 @@
                     img.classList.remove('mobile-image');
                 });
             }
+            showSlides(slideIndex); // Update slides after changing images
         }
 
         detectDevice();
         window.addEventListener('resize', detectDevice);
-
-        showSlides(slideIndex);
 
         function plusSlides(n) {
             slideIndex += n;
@@ -183,38 +202,68 @@
                 slideIndex = slides.length - 1;
             }
             showSlides(slideIndex);
+            resetAutoPlay(); // Reset auto-play on manual navigation
         }
 
         function currentSlide(n) {
             slideIndex = n;
             showSlides(slideIndex);
+            resetAutoPlay(); // Reset auto-play on manual navigation
         }
 
         function showSlides(n) {
-            const slideWidth = slides[0].clientWidth;
             const slidesContainer = document.getElementById('slides');
+            const slideWidth = slidesContainer.clientWidth;
 
             slidesContainer.style.transform = `translateX(${-n * slideWidth}px)`;
 
             dots.forEach(dot => dot.classList.remove('active'));
-            dots[n].classList.add('active');
+            if (dots[n]) {
+                dots[n].classList.add('active');
+            }
+
+            // Update the dynamic title if needed
+            // This part assumes you have a main-title element. If not, remove or comment out the related lines.
+            /*
+            if (document.getElementById("main-title")) {
+                document.getElementById("main-title").textContent = titles[currentIndex];
+            }
+            */
+        }
+
+        // Auto-Play Functionality
+        let autoPlayInterval = setInterval(() => {
+            plusSlides(1);
+        }, 4000);
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                plusSlides(1);
+            }, 4000);
         }
 
         window.addEventListener('resize', () => showSlides(slideIndex));
 
-        
+        // Dynamic Title Functionality
         const titles = ["Goal Setting Tools", "That Drive Results!"];
-        let currentIndex = 0;
+        let currentTitleIndex = 0;
 
         function changeTitle() {
-            currentIndex = (currentIndex + 1) % titles.length; // Cycle through titles
-            document.getElementById("dynamic-title").textContent = titles[currentIndex]; // Change the page title
-            document.getElementById("main-title").textContent = titles[currentIndex]; // Change the heading
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length; // Cycle through titles
+            document.getElementById("dynamic-title").textContent = titles[currentTitleIndex]; // Change the page title
+
+            // Uncomment the following lines if you have a main-title element
+            /*
+            const mainTitle = document.getElementById("main-title");
+            if (mainTitle) {
+                mainTitle.textContent = titles[currentTitleIndex]; // Change the heading
+            }
+            */
         }
 
         // Change title every 4 seconds
         setInterval(changeTitle, 4000);
-    
     </script>
 </body>
 </html>
