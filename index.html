@@ -49,21 +49,27 @@
             object-fit: fill; /* Use cover for mobile to fill the entire screen */
         }
 
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 22px;
-            color: white;
-            font-weight: bold;
-            font-size: 35px;
-            background-color: rgba(31, 32, 29, 0.319);
-            user-select: none;
-            transition: background-color 0.6s ease;
-            border-radius: 50%;
-            z-index: 10;
+       .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 22px;
+        color: white;
+        font-weight: bold;
+        font-size: 35px;
+        background-color: rgba(31, 32, 29, 0.319);
+        user-select: none;
+        transition: background-color 0.6s ease;
+        border-radius: 50%;
+        z-index: 10;
+        width: 60px; 
+        height: 60px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
         }
+
 
         .prev {
             left: 20px; 
