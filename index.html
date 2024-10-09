@@ -222,9 +222,6 @@
                 dots[n].classList.add('active');
             }
 
-            // Update the dynamic title if needed
-            // This part assumes you have a main-title element. If not, remove or comment out the related lines.
-            /*
             if (document.getElementById("main-title")) {
                 document.getElementById("main-title").textContent = titles[currentIndex];
             }
@@ -250,8 +247,8 @@
         let currentTitleIndex = 0;
 
         function changeTitle() {
-            currentTitleIndex = (currentTitleIndex + 1) % titles.length; // Cycle through titles
-            document.getElementById("dynamic-title").textContent = titles[currentTitleIndex]; // Change the page title
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length; 
+            document.getElementById("dynamic-title").textContent = titles[currentTitleIndex]; 
 
             // Uncomment the following lines if you have a main-title element
             /*
@@ -262,7 +259,6 @@
             */
         }
 
-        // Change title every 4 seconds
         setInterval(changeTitle, 4000);
     </script>
 </body>
