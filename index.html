@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="dynamic-title">Goal Setting Tools</title>
+    <link rel="icon" href="images/fevicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/fevicon.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 1.5s ease-in-out;
+        }
+
+        .slides a {
+            min-width: 100%;
+            height: 100vh;
+        }
+
+        .slides img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Ensures full screen images without cutting */
+        }
+
+        .slides img.mobile-image {
+            object-fit: fill; /* Use cover for mobile to fill the entire screen */
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 22px;
+            color: white;
+            font-weight: bold;
+            font-size: 35px;
+            background-color:rgba(31, 32, 29, 0.319);
+            user-select: none;
+            transition: 0.6s ease;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: #7f30f5da;
+        }
+
+        .dot-container {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .dot.active {
+            background-color: #634294;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slides" id="slides">
+            <a><img class="slider-image" src="images/panel1.jpg" alt="Image 1"></a>
+            <a href="https://goalsetting101.com" target="_blank"><img class="slider-image" src="images/panel2.jpg" alt="Image 2"></a>
+            <a href="https://achievegoalsfastmanifesto.com" target="_blank"><img class="slider-image" src="images/panel3.jpg" alt="Image 3"></a>
+            <a href="https://epiclifemanifesto.com" target="_blank"><img class="slider-image" src="images/panel4.jpg" alt="Image 4"></a>
+            <a href="https://beyourownheromanifesto.com" target="_blank"><img class="slider-image" src="images/panel5.jpg" alt="Image 5"></a>
+            <a href="https://unleashyourgreatness.com" target="_blank"><img class="slider-image" src="images/panel6.jpg" alt="Image 6"></a>
+            <a href="https://goalsettingforknuckleheads.com" target="_blank"><img class="slider-image" src="images/panel7.jpg" alt="Image 7"></a>
+            <a href="https://comebackmanifesto.com" target="_blank"><img class="slider-image" src="images/panel8.jpg" alt="Image 8"></a>
+            <a href="https://bigbangmanifesto.com" target="_blank"><img class="slider-image" src="images/panel9.jpg" alt="Image 9"></a>
+            <a href="https://powerofnomanifesto.com" target="_blank"><img class="slider-image" src="images/panel10.jpg" alt="Image 10"></a>
+            <a href="https://www.zerodefectsmanifesto.com" target="_blank"><img class="slider-image" src="images/panel11.jpg" alt="Image 11"></a>
+            <a href="https://secretsaucemanifesto.com" target="_blank"><img class="slider-image" src="images/panel12.jpg" alt="Image 12"></a>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <div class="dot-container" id="dotContainer">
+            <span class="dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+            <span class="dot" onclick="currentSlide(10)"></span>
+            <span class="dot" onclick="currentSlide(11)"></span>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slides a');
+        const dots = document.querySelectorAll('.dot');
+        const imageElements = document.querySelectorAll('.slider-image');
+
+        const desktopImages = [
+            "images/panel1.jpg", "images/panel2.jpg", "images/panel3.jpg",
+            "images/panel4.jpg", "images/panel5.jpg", "images/panel6.jpg",
+            "images/panel7.jpg", "images/panel8.jpg", "images/panel9.jpg",
+            "images/panel10.jpg", "images/panel11.jpg","images/panel12.jpg"
+        ];
+
+        const mobileImages = [
+            "images/mobile1.jpg", "images/mobile2.jpg", "images/mobile3.jpg",
+            "images/mobile4.jpg", "images/mobile5.jpg", "images/mobile6.jpg",
+            "images/mobile7.jpg", "images/mobile8.jpg", "images/mobile9.jpg",
+            "images/mobile10.jpg", "images/mobile11.jpg","images/mobile12.jpg"
+        ];
+
+        function detectDevice() {
+            if (window.innerWidth <= 912) {
+                imageElements.forEach((img, index) => {
+                    img.src = mobileImages[index];
+                    img.classList.add('mobile-image');
+                });
+            } else {
+                imageElements.forEach((img, index) => {
+                    img.src = desktopImages[index];
+                    img.classList.remove('mobile-image');
+                });
+            }
+        }
+
+        detectDevice();
+        window.addEventListener('resize', detectDevice);
+
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            slideIndex += n;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            showSlides(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides(slideIndex);
+        }
+
+        function showSlides(n) {
+            const slideWidth = slides[0].clientWidth;
+            const slidesContainer = document.getElementById('slides');
+
+            slidesContainer.style.transform = `translateX(${-n * slideWidth}px)`;
+
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[n].classList.add('active');
+        }
+
+        window.addEventListener('resize', () => showSlides(slideIndex));
+
+        
+        const titles = ["Goal Setting Tools", "That Drive Results!"];
+        let currentIndex = 0;
+
+        function changeTitle() {
+            currentIndex = (currentIndex + 1) % titles.length; // Cycle through titles
+            document.getElementById("dynamic-title").textContent = titles[currentIndex]; // Change the page title
+            document.getElementById("main-title").textContent = titles[currentIndex]; // Change the heading
+        }
+
+        // Change title every 4 seconds
+        setInterval(changeTitle, 4000);
+    
+    </script>
+</body>
+</html>
